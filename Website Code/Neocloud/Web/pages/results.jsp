@@ -15,11 +15,11 @@
  
  <div id="content" style="padding-top:156px; background-color:#EEEEEE;height:80%;width:100%;float:left;text-align: center;text-align: center;">
 
-<!-- <h2>
+<h2>
 	Results are : <s:property value="%{searchProductList}"/>
 	<br/>
 	Lowest Price is : <s:property value="%{productPrice}"/>
-	</h2> -->
+	</h2>
 <div class="product-info"><p class="meta-text">Ebay<br></p>
 </div>
 <div class="product-info"><p class="meta-text">Amazon<br></p>
