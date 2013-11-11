@@ -6,10 +6,14 @@
 #include<sys/types.h>
 #include<stdio.h>
 #include<curl/curl.h>
+#include<tr1/unordered_map>
+//#include<tr1/pair.h>
 
 using namespace std;
 
-void parseDocument(string, ofstream&);
+void parseProductsName(string, tr1::unordered_map<int,string>&);
+void parseProductsPrice(string, tr1::unordered_map<int,string>&);
+void associateProductNameAndPrice(tr1::unordered_map<int,string>& , tr1::unordered_map<int,string>&, tr1::unordered_map<string,string>&);
 string getHTMLSource(string);
 size_t curl_to_string(void *ptr, size_t size, size_t nmemb, void *data);
 
@@ -26,7 +30,7 @@ int main ()
 
    char line[1024];
    int count = 0;
-
+/*
    while( ifs.good() )
     {
        ifs.getline(line, 1024);
@@ -57,37 +61,62 @@ int main ()
              }
          }
     }
+*/
 
-    //parseDocument("http://www.ebay.com/sch/Jeans-/11483/i.html?" , ofs);
+    string page = getHTMLSource("http://www.ebay.com/sch/Jeans-/11483/i.html?");
+    tr1::unordered_map<int,string> productList;
+    parseProductsName(page,productList);
+    tr1::unordered_map<int,string> productPrice;
+    parseProductsPrice(page,productPrice);
+    tr1::unordered_map<string, string> association;
+    associateProductNameAndPrice(productList, productPrice, association);
+    tr1::unordered_map<string, string>::iterator stritr = association.begin();
+    tr1::unordered_map<string, string>::iterator enditr = association.end();
+
+    while(stritr != enditr)
+      {
+        cout<<"Product Name: "<<stritr->first<<" Product Price: "<<stritr->second<<endl;
+        stritr++;
+      }
+
     ofs.close();
     return 0;
 }
 
 
-void parseDocument(string url, ofstream &ofs)
+void parseProductsName(string page, tr1::unordered_map<int,string> &productList)
 {
 
-    url = url + "\n";
-    ofs.write(url.c_str(), url.size());
-    cout<<url<<endl;
+    int lineNumber = 1;
+    //tr1::unordered_map<int,string> productList;
 
-    string page =  getHTMLSource(url);
+    //url = url + "\n";
+    //ofs.write(url.c_str(), url.size());
+    //cout<<url<<endl;
+
+    //string page =  getHTMLSource(url);
     int i = 0;
     int size = page.size();
-    cout<<endl<<"size is "<<size;
+    //cout<<endl<<"size is "<<size;
 
     while(i < size)
       {
           while(i < size && page[i] != '<')
+            {
+              if(page[i] == '\n')
+                lineNumber++;
               i++;
+            }
 
           i++;
           string link = "<";
           if(i < size && page[i] == 'a')
             {
-                while(i+2< size && (page[i] != '/' || page[i+1] != 'a' || page[i+2] != '>' ) )
+                while(i+3< size && (page[i] != '<' || page[i+1] != '/' || page[i+2] != 'a' || page[i+3] != '>' ) )
                   {
                     link = link + page[i];
+                    if(page[i] == '\n')
+                      lineNumber++;
                     i++;
                   }
 
@@ -98,21 +127,143 @@ void parseDocument(string url, ofstream &ofs)
                       if (pos != string::npos)
                          {
                            int index = pos + 1;
-                           cout<<link.substr(index)<<endl;
+                           //cout<<link.substr(index)<<endl<<endl;
+                           string productItem = link.substr(index);
+                           pair<tr1::unordered_map<int,string>::iterator, bool> res = productList.insert(make_pair<int,string> (lineNumber, productItem));
+                           if(res.second == false)
+                              cout<<"At this line number entry already exist "<<endl;
                          }
                       else
                          {
-                           cout<<"No present"<<endl;
+                           cout<<"No product here "<<endl;
                          }
                       //cout<<link<<endl;
                    }
 
                 i = i+3;
             }
-      }
+      }//end while
 
     //cout<<endl<<endl<<page<<endl<<endl;
+
+    tr1::unordered_map<int,string>::iterator stritr = productList.begin();
+    tr1::unordered_map<int,string>::iterator enditr = productList.end();
+    while(stritr != enditr)
+      {
+        cout<<"Line number is: "<<stritr->first<<" Product is: "<<stritr->second<<endl;
+        stritr++;
+      }
+
+
 }
+
+void parseProductsPrice(string page, tr1::unordered_map<int,string> &productPrice)
+{
+
+    int lineNumber = 1;
+    //tr1::unordered_map<int,string> productList;
+
+    //url = url + "\n";
+    //ofs.write(url.c_str(), url.size());
+    //cout<<url<<endl;
+
+    //string page =  getHTMLSource(url);
+    int i = 0;
+    int size = page.size();
+    //cout<<endl<<"size is "<<size;
+
+    while(i < size)
+      {
+          while(i < size && page[i] != '<')
+            {
+              if(page[i] == '\n')
+                lineNumber++;
+              i++;
+            }
+
+          i++;
+          string link = "<";
+          if(i+3 < size && page[i] == 's' && page[i+1] == 'p' && page[i+2] == 'a' && page[i+3] == 'n')
+            {
+                while(i+6< size && (page[i] != '<' || page[i+1] != '/' || page[i+2] != 's' || page[i+3] != 'p' || page[i+4] != 'a' || page[i+5] != 'n' || page[i+6] != '>' ) )
+                  {
+                    link = link + page[i];
+                    if(page[i] == '\n')
+                      lineNumber++;
+                    i++;
+                  }
+
+                size_t pos = link.find("itemprop=\"price\"");
+                if (pos != string::npos)
+                   {
+                      pos = link.find_last_of(">");
+                      if (pos != string::npos)
+                         {
+                           int index = pos + 1;
+                           //cout<<link.substr(index)<<endl<<endl;
+                           string priceItem = link.substr(index);
+                           pair<tr1::unordered_map<int,string>::iterator, bool> res = productPrice.insert(make_pair<int,string> (lineNumber, priceItem));
+                           if(res.second == false)
+                              cout<<"At this line number entry already exist "<<endl;
+                         }
+                      else
+                         {
+                           cout<<"No product here "<<endl;
+                         }
+                      //cout<<link<<endl;
+                   }
+
+                i = i+3;
+            }
+      }//end while
+
+    //cout<<endl<<endl<<page<<endl<<endl;
+
+    tr1::unordered_map<int,string>::iterator stritr = productPrice.begin();
+    tr1::unordered_map<int,string>::iterator enditr = productPrice.end();
+    while(stritr != enditr)
+      {
+        cout<<"Line number is: "<<stritr->first<<" Product Price is: "<<stritr->second<<endl;
+        stritr++;
+      }
+
+
+}
+
+void associateProductNameAndPrice(tr1::unordered_map<int,string>& productName, tr1::unordered_map<int,string>& productPrice, tr1::unordered_map<string, string>& association)
+{
+  tr1::unordered_map<int, string>::iterator stritr = productName.begin();
+  tr1::unordered_map<int, string>::iterator enditr = productName.end();
+
+  while(stritr != enditr)
+    {
+       int lineNumber = stritr->first;
+       string productName = stritr->second;
+
+       bool foundMatch = false;
+
+       int searchDistance = 20;
+       int forwardSearch = 0;
+
+       while(!foundMatch && forwardSearch<searchDistance)
+         {
+           tr1::unordered_map<int, string>::iterator find = productPrice.find(lineNumber+forwardSearch);
+           if(find != productPrice.end())
+             {
+                association.insert(make_pair<string,string> (productName, find->second));
+                foundMatch = true;
+             }
+           else
+             forwardSearch++;
+         }
+
+       if(foundMatch == false)
+          association.insert(make_pair<string,string> (productName, "EMPTY"));
+
+       stritr++;
+    }
+}
+
 
 string getHTMLSource(string url)
 {
@@ -133,6 +284,9 @@ string getHTMLSource(string url)
       urlN = url.substr(8, size-8);
     }
 */
+
+
+
   curl = curl_easy_init();
   if(curl) {
     curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
