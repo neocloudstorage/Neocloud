@@ -1,14 +1,49 @@
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
+
+import java.util.ArrayList;
 
 
 public class SearctProductListAction {
 	private String searchProduct;
 	private String searchProductList;
 	private String productPrice;
+	
+	private String ebayResultList;
+	private String ebayProductPrice;
+	private String ebayProductURL;
+	private String amazonResultList;
+	private String amazonProductPrice;
+	private String amazonProductURL;
+	private String bestBuyResultList;
+	private String bestBuyProductPrice;
+	private String bestBuyProductURL;
+	private String walmartResultList;
+	private String walmartProductPrice;
+	private String walmartProductURL;
+	
+	public String getEbayResultList() {
+		return ebayResultList;
+	}
+	public void setEbayResultList(String ebayResultList) {
+		this.ebayResultList = ebayResultList;
+	}
+	
+	public String getEbayProductPrice() {
+		return ebayProductPrice;
+	}
+	public void setEbayProductPrice(Double ebayProductPrice) {
+		this.ebayProductPrice = ebayProductPrice.toString();
+	}
+	
+	public String getEbayProductURL() {
+		return ebayProductURL;
+	}
+	public void setEbayProductURL(String ebayProductURL) {
+		this.ebayProductURL = ebayProductURL;
+	}
 
 	public String getProductPrice() {
 		return productPrice;
@@ -29,9 +64,12 @@ public class SearctProductListAction {
 		this.searchProductList = searchProductList;
 	}
 
-	public String execute() {
+	public String execute() 
+	{
+		
 		String product = getSearchProduct();
 
+		//DB Test code
 		DBConnector myConnector = new DBConnector();
 		Connection myConnection = myConnector.getDbConnection();
 		Statement stmt = null;
@@ -41,7 +79,7 @@ public class SearctProductListAction {
 			rs = stmt.executeQuery("SELECT * FROM test");
 			rs.next();
 			setSearchProductList ((String)rs.getObject(1));
-			System.out.println(searchProductList);
+			System.out.println(searchProductList+ "Successful from Database!");
 			// or alternatively, if you don't know ahead of time that
 			// the query will be a SELECT...
 
@@ -83,6 +121,24 @@ public class SearctProductListAction {
 		//setSearchProductList(product+ "1  , "+ product+"2  " );
 		setProductPrice("$30");
 		System.out.println(getSearchProduct());
+		
+		//End of DB Test Code
+		
+		EbaySearch ebayObj = new EbaySearch();
+		ArrayList<ResultItem> ebayResults = ebayObj.runEbaySearch(product);
+		if(ebayResults.size()==0)
+		{
+			ebayResultList = "No Results";
+			ebayProductPrice = "-";
+			ebayProductURL = "-";
+		}
+		else
+		{
+			ebayResultList = ebayResults.get(0).name;
+			ebayProductPrice = ebayResults.get(0).price.toString();
+			ebayProductURL = ebayResults.get(0).url;
+		}
+		
 		return "SUCCESS";
 
 	}

@@ -2,41 +2,34 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <html>
 <head>
-
+<link rel="stylesheet" type="text/css" href="pages/results.css">
 </head>
-<body>
+<body class="body-class">
 
-	
-	<div id="container" style="width:100%">
 
-		<div id="header" style="background-color: #606060;">
+	<div class="container" style="width: 100%">
 
-			<h1 style="margin-bottom: 0; text-align: center;">Smart Price App</h1>
-		</div>
-		<div id="content"
-			style="background-color: #EEEEEE; height: 90%; width: 100%; float: left; text-align: center;">
+		<div class="header">BestPriceApp</div>
+		<div class="content">
 			<br />
-			<s:form action="Welcome" theme="simple"> 
-			Username :<s:textfield name="username" />
-			Password :<s:password name="password" />
-				<s:submit value="Login" />
+			<s:form action="Welcome" theme="simple" style="text-align: center; font-size:15px;"> 
+				Username :<s:textfield name="username" class="input" />
+				<br>
+				Password :<s:password name="password" class="input" />
+				<br>
+				<s:submit value="Login" style="text-align: center; font-size:15px;" />
 			</s:form>
-			<br /> <br /> <br />
+			<br /> <br />
 			<h2>
-				<s:form action="SearchProductList">
-					<s:textfield name="searchProduct" theme="css_xhtml" style="height: 50;width: 200;" > Search:</s:textfield>
-					<div
-						style="width: 95%; height: 2%; position: absolute; vertical-align: middle; text-align: center;">
-						<button type="submit"
-							style="background-color: #B0B0B0; margin-left: auto; margin-right: 44%; display: block; margin-top: 1%; margin-bottom: 0%;height: 50;width: 100">
-							Go Search !!</button>
+				<s:form action="SearchProductList" style="text-align: center;">
+					<s:textfield name="searchProduct" theme="css_xhtml" style="text-align: center; font-size:20px; width: 80%"> Search:</s:textfield>
+					<div class="button" style="text-align: center;">
+						<button type="submit" style="text-align: center; font-size:20px; margin-left: 50px;">Go Search !!</button>
 					</div>​
-	</s:form>
+				</s:form>
 			</h2>
 		</div>
-		<div id="footer"
-			style="background-color: #606060; clear: both; text-align: center;">
-			Team NeoCloud</div>
+		<div class="footer">Team NeoCloud</div>
 	</div>
 </body>
 </html>
