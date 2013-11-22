@@ -44,13 +44,19 @@ public class EbaySearch
         System.out.println("Find " + result.getSearchResult().getCount() + " items." );
         List<SearchItem> items = result.getSearchResult().getItem();
         Amount a;
+        
+        int count=0;
         for(SearchItem item : items) 
-        {
+        {	
+        	if(count > 5)
+        		break;
+        	count++;
+        	
         	System.out.println(item.getTitle()+" ... "+item.getViewItemURL());
         	a = item.getSellingStatus().getConvertedCurrentPrice();
         	System.out.println(a.getValue());
         	
-        	ResultItem temp = new ResultItem(item.getTitle(), a.getValue(), item.getViewItemURL());
+        	ResultItem temp = new ResultItem(item.getTitle(), String.valueOf(a.getValue()), item.getViewItemURL());
         	jsp_result.add(temp);
         }
 		

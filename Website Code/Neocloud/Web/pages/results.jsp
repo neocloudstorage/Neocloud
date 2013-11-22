@@ -26,12 +26,15 @@
 		<s:property value="%{ebayResultList}"/><br>
 		Price: <s:property value="%{ebayProductPrice}"/>$<br>
 		<a href=<s:property value="%{ebayProductURL}"/>>Visit Link</a><br>
-		
 	</p>
 </div>
 <div class="product-info">
 	<img class="imgClass" src="http://ts2.mm.bing.net/th?id=H.4986879105631917&w=186&h=109&c=7&rs=1&pid=1.7"/>
-	<p class="meta-text">Amazon<br></p>
+	<p class="meta-text"><br>
+		<s:property value="%{amazonResultList}"/><br>
+		Price: <s:property value="%{amazonProductPrice}"/>$<br>
+		<a href=<s:property value="%{amazonProductURL}"/>>Visit Link</a><br>
+	</p>
 </div>
 <div class="product-info">
 	<img class="imgClass" src="http://ts3.mm.bing.net/th?id=H.5029227475634718&w=275&h=188&c=7&rs=1&pid=1.7"/>
