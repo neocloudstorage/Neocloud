@@ -2,8 +2,12 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
-
 import java.util.ArrayList;
+import java.util.Map;
+
+import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.inject.Context;
 
 public class SearctProductListAction {
 	private String searchProduct;
@@ -22,6 +26,23 @@ public class SearctProductListAction {
 	private String walmartResultList;
 	private String walmartProductPrice;
 	private String walmartProductURL;
+	private ArrayList<ResultItem> ebayResults;
+	ArrayList<ResultItem> amazonResults;
+	public ArrayList<ResultItem> getAmazonResults() {
+		return amazonResults;
+	}
+
+	public void setAmazonResults(ArrayList<ResultItem> amazonResults) {
+		this.amazonResults = amazonResults;
+	}
+
+	public ArrayList<ResultItem> getEbayResults() {
+		return ebayResults;
+	}
+
+	public void setEbayResults(ArrayList<ResultItem> ebayResults) {
+		this.ebayResults = ebayResults;
+	}
 
 	// Ebay
 	public String getEbayResultList() {
@@ -154,13 +175,17 @@ public class SearctProductListAction {
 	public void setSearchProductList(String searchProductList) {
 		this.searchProductList = searchProductList;
 	}
+	
 
 	public String execute() {
 
 		String product = getSearchProduct();
+		if(product.length()==0){
+			return "FAILURE";
+		}
 
-		// DB Test code
-		DBConnector myConnector = new DBConnector();
+		// DB Test code**********************Remove comments from here for DB************************
+		/*DBConnector myConnector = new DBConnector();
 		Connection myConnection = myConnector.getDbConnection();
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -210,28 +235,38 @@ public class SearctProductListAction {
 
 		// setSearchProductList(product+ "1  , "+ product+"2  " );
 		setProductPrice("$30");
-		System.out.println(getSearchProduct());
+		System.out.println(getSearchProduct());*/
 
-		// End of DB Test Code
+		// End of DB Test Code*******************Till here************************************************
 
 		
 		//Ebay Results fetching and Parsing
 		EbaySearch ebayObj = new EbaySearch();
-		ArrayList<ResultItem> ebayResults = ebayObj.runEbaySearch(product);
+		ebayResults = ebayObj.runEbaySearch(product);
+		
+			/*for(ResultItem rs : ebayResults){
+			System.out.println(rs.name);
+			System.out.println(rs.price);
+			System.out.println(rs.url);
+		}*/
 		if (ebayResults==null || ebayResults.size() == 0) {
 			ebayResultList = "No Results";
 			ebayProductPrice = "-";
 			ebayProductURL = "-";
 		} else {
+			setEbayResults(ebayResults);
 			setEbayResultList(ebayResults.get(0).name);
 			setEbayProductPrice(ebayResults.get(0).price);
 			setEbayProductURL(ebayResults.get(0).url);
+			/*setEbayResultList(ebayResults.get(1).name);
+			setEbayProductPrice(ebayResults.get(1).price);
+			setEbayProductURL(ebayResults.get(1).url);*/
 		}
 		//End of Ebay code
 		
 		//Amazon result fetching and parsing
 		AmazonSearch amazonObj = new AmazonSearch();
-		ArrayList<ResultItem> amazonResults = amazonObj.runAmazonSearch(product);
+	    amazonResults = amazonObj.runAmazonSearch(product);
 		if (amazonResults==null || amazonResults.size() == 0) {
 			setAmazonResultList("No Results");
 			setAmazonProductPrice("-");

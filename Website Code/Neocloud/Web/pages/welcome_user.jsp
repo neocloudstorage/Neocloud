@@ -1,38 +1,46 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <html>
-<head></head>
-<body>
-	<div id="container" style="width: 100%">
+<head>
+<link rel="stylesheet" type="text/css" href="pages/results.css">
+</head>
+<body class="body-class">
+	<div id="container" >
+		<div class="header">BestPrice App</div>
+		<br />
 
-		<div id="header" style="background-color: #606060;">
-
-			<h1 style="margin-bottom: 0; text-align: center;">Smart Price App</h1>
 		</div>
- <div id="content" style="background-color:#EEEEEE;height:90%;width:100%;float:left; text-align: center;">
-	<h4>
-		Hello
-		<s:property value="username" />
+ <div id="content" style="height:90%;width:100%;float:left; text-align: center;">
+	<h3>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+		<font size="7" color="black">Hello</font>
+		<font size="7" color="black"><s:property value="username"  /> !!!</font>
 	
-	 </h4>  
+	 </h3>  
 	
-	
+	<br/>
 	<h2>
-	<s:form action="SearchProductList">
-	<s:textfield name="searchProduct" theme="css_xhtml" > Search:</s:textfield> 
-	<div style="width:95%;height:2%;position:absolute;vertical-align:middle;text-align:center;">
-    <button type="submit"  style="background-color:#B0B0B0 ;margin-left:auto;margin-right:45%;display:block;margin-top:3%;margin-bottom:0%;">
-Go Search !!</button> 
-</div>​
-	</s:form>
-	</h2>
+				<s:form action="SearchProductList" style="text-align: center;">
+					<s:textfield name="searchProduct" theme="css_xhtml" style="text-align: center; font-size:20px; width: 40%"><font size="7" color="black"> Search:</font></s:textfield>
+					
+					<div class="button" style="text-align: center;">
+					    <br/>
+						<button type="submit" style="text-align: center; font-size:20px; margin-left: 50px;"><font size="4" color="black">Go Search !!</font></button>
+					</div>​
+				</s:form>
+			</h2>
+		</div>
 	
-	</div>
-<div id="footer"
-			style="background-color: #606060  ; clear: both; text-align: center;">
-			Team NeoCloud</div>
-	</div>
 	
+<div class="footer">Team NeoCloud</div>
+
 </body>
 </html>
 

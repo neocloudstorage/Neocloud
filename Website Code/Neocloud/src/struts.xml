@@ -6,14 +6,17 @@
 <struts>
  
 	<package name="default"  extends="struts-default">
+	
 		<action name="Login">
 			<result>pages/login.jsp</result>
 		</action>
 		<action name="Welcome" class="WelcomeUserAction">
 			<result name="SUCCESS">pages/welcome_user.jsp</result>
+			<result name="FAILURE">pages/failure_user.jsp</result>
 		</action>
 		<action name="SearchProductList" class="SearctProductListAction">
 			<result name="SUCCESS">pages/results.jsp</result>
+			<result name="FAILURE">pages/failure_search.jsp</result>
 		</action>
 		
 	</package>

@@ -61,17 +61,22 @@ public class AmazonSearch
             NodeList titleNodes = doc.getElementsByTagName("Title");
             NodeList priceNodes = doc.getElementsByTagName("FormattedPrice");
             NodeList urlNodes = doc.getElementsByTagName("DetailPageURL");
-            if(titleNodes.getLength()>=1 && priceNodes.getLength()>=2 && urlNodes.getLength()>=1)
+            if(titleNodes.getLength()>=2 && priceNodes.getLength()>=2 && urlNodes.getLength()>=2)
             {
-            	Node title = titleNodes.item(0);
-                Node lowestPrice = priceNodes.item(1);
-                Node url = urlNodes.item(0);
+            	int i=0;
+            	while(i<=3){
+            	Node title = titleNodes.item(i);
+                Node lowestPrice = priceNodes.item(i);
+                Node url = urlNodes.item(i);
+                ResultItem temp = new ResultItem(title.getTextContent(), lowestPrice.getTextContent(), url.getTextContent());
+                amazonResults.add(temp);
                 System.out.println(title.getTextContent());
                 System.out.println(lowestPrice.getTextContent());
                 System.out.println(url.getTextContent());
-                
-                ResultItem temp = new ResultItem(title.getTextContent(), lowestPrice.getTextContent(), url.getTextContent());
-                amazonResults.add(temp);
+                i++;
+            	} 
+               
+               
             }
             
 //            title = titleNodes.item(1);

@@ -13,7 +13,7 @@ import com.ebay.services.finding.SearchItem;
 public class EbaySearch 
 {
 	
-	ArrayList<ResultItem> runEbaySearch (String keyword)
+	public ArrayList<ResultItem> runEbaySearch (String keyword)
 	{
 		System.out.println("searching for: "+keyword);
 		ArrayList<ResultItem> jsp_result = new ArrayList<ResultItem>();
@@ -33,16 +33,17 @@ public class EbaySearch
         //set request parameters
         request.setKeywords(keyword);
         PaginationInput pi = new PaginationInput();
-        pi.setEntriesPerPage(2);
+        pi.setEntriesPerPage(4);
         request.setPaginationInput(pi);
         
         //call service
         FindItemsByKeywordsResponse result = serviceClient.findItemsByKeywords(request);
         
         //output result
-        System.out.println("Ack = "+result.getAck());
-        System.out.println("Find " + result.getSearchResult().getCount() + " items." );
+       // System.out.println("Ack = "+result.getAck());
+      //  System.out.println("Find " + result.getSearchResult().getCount() + " items." );
         List<SearchItem> items = result.getSearchResult().getItem();
+        //System.out.println("Items fetched are ----------->"+items.size()+"**********");
         Amount a;
         
         int count=0;
@@ -52,14 +53,18 @@ public class EbaySearch
         		break;
         	count++;
         	
-        	System.out.println(item.getTitle()+" ... "+item.getViewItemURL());
+        	//System.out.println(item.getTitle()+" ... "+item.getViewItemURL());
         	a = item.getSellingStatus().getConvertedCurrentPrice();
-        	System.out.println(a.getValue());
+        	//System.out.println(a.getValue());
         	
         	ResultItem temp = new ResultItem(item.getTitle(), String.valueOf(a.getValue()), item.getViewItemURL());
         	jsp_result.add(temp);
         }
-		
+        
+       /* for(ResultItem rs: jsp_result){
+        
+        System.out.println("RS vals are $$$$$$$$$$ :"+rs.name);
+        }*/
 		return jsp_result;
 	}
 
