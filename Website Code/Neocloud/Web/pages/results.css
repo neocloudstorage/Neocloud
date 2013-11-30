@@ -1,6 +1,12 @@
-#content {
+	#content {
 	width: 100%;
 	margin-bottom: 5px;
+}
+
+body 
+{
+background-image:url('img6.jpg');
+background-color:#cccccc;
 }
 
 .header {

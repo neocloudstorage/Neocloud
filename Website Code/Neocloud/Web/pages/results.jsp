@@ -1,3 +1,5 @@
+<%@page import="com.opensymphony.xwork2.inject.Context"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <html>
@@ -12,7 +14,7 @@
 			BestPrice App
 		</div>
  
- <div id="content" style="padding-top:156px; background-color:#EEEEEE;height:80%;width:100%;float:left;text-align: center;text-align: center;">
+ <div id="content" style="padding-top:156px;height:80%;width:100%;float:left;text-align: center;text-align: center;">
 
 <h2>
 	Results are : <s:property value="%{searchProductList}"/>
@@ -22,16 +24,24 @@
 
 <div class="product-info">
 	<img class="imgClass" src="http://2.bp.blogspot.com/-iyrT2e_ONm0/ThRvL224gbI/AAAAAAAASOo/7ojEVUaUnx0/s200/Ebay_Logo.jpg"/>
-	<p class="meta-text"><br>
-		<s:property value="%{ebayResultList}"/><br>
-		Price: <s:property value="%{ebayProductPrice}"/>$<br>
-		<a href=<s:property value="%{ebayProductURL}"/>>Visit Link</a><br>
-		
+	<s:iterator value="ebayResults">
+	  <p class="meta-text"><br>
+	  <s:property value="name"/><br>
+		Price: <s:property value="price"/><br>
+		<a href=<s:property value="url"/>>Visit Link</a><br>
 	</p>
+	   </s:iterator>
+		
 </div>
 <div class="product-info">
 	<img class="imgClass" src="http://ts2.mm.bing.net/th?id=H.4986879105631917&w=186&h=109&c=7&rs=1&pid=1.7"/>
-	<p class="meta-text">Amazon<br></p>
+	<s:iterator value="amazonResults">
+	  <p class="meta-text"><br>
+	  <s:property value="name"/><br>
+		Price: <s:property value="price"/><br>
+		<a href=<s:property value="url"/>>Visit Link</a><br>
+	</p>
+	   </s:iterator>
 </div>
 <div class="product-info">
 	<img class="imgClass" src="http://ts3.mm.bing.net/th?id=H.5029227475634718&w=275&h=188&c=7&rs=1&pid=1.7"/>
