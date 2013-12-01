@@ -3,11 +3,19 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
 
-public class WelcomeUserAction{
- 
+public class RegisterInDBAction {
 	private String username;
 	private String password;
-	
+	private String email;
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public String getPassword() {
 		return password;
 	}
@@ -19,32 +27,25 @@ public class WelcomeUserAction{
 	public String getUsername() {
 		return username;
 	}
- 
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
- 
-	// all struts logic here
+
 	public String execute() {
-        WelcomeUserAction wobj = new WelcomeUserAction();
-        wobj.setUsername(username);
-        wobj.setPassword(password);
-       
-        // database code to match user name and password 
-        if(wobj.getUsername().length()==0 || wobj.getPassword().length()==0)
-        {
-        	return "FAILURE";
-        }
-        
-        DBConnector myConnector = new DBConnector();
+		if (username.length() == 0 | password.length() == 0) {
+			return "FAILURE";
+		}
+
+		DBConnector myConnector = new DBConnector();
 		Connection myConnection = myConnector.getDbConnection();
 		Statement stmt = null;
 		ResultSet rs = null;
-		
+
 		try 
 		{
 
-			String sqlStmt = "SELECT passwrd FROM users WHERE userName = \""
+			String sqlStmt = "SELECT * FROM users WHERE userName = \""
 					+ getUsername() + "\";";
 			System.out.println(sqlStmt);
 			stmt = myConnection.createStatement();
@@ -52,17 +53,16 @@ public class WelcomeUserAction{
 			if (stmt.execute(sqlStmt)) 
 			{
 				rs = stmt.getResultSet();
-				if(!rs.first())
+				if(rs.first())
 					return "FAILURE";
-				String dbPass = (String)rs.getObject(1);
-				if(!  getPassword().equals(dbPass))
-				{
-					return "FAILURE";
-				}
-				return "SUCCESS";
 			}
-			else 
-				return "FAILURE";
+
+			stmt = myConnection.createStatement();
+			sqlStmt = "INSERT INTO users VALUES (\"" + getUsername() + "\", \""
+					+ getEmail() + "\", \"" + getPassword() + "\");";
+			System.out.println(sqlStmt);
+			stmt.execute(sqlStmt);
+			return "SUCCESS";
 			
 		} 
 		catch (SQLException ex) 
@@ -73,8 +73,6 @@ public class WelcomeUserAction{
 			System.out.println("VendorError: " + ex.getErrorCode());
 			return "FAILURE";
 		}
-        
- 
+
 	}
 }
-

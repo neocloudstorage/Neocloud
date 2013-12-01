@@ -57,7 +57,7 @@ public class EbaySearch
         	a = item.getSellingStatus().getConvertedCurrentPrice();
         	//System.out.println(a.getValue());
         	
-        	ResultItem temp = new ResultItem(item.getTitle(), String.valueOf(a.getValue()), item.getViewItemURL());
+        	ResultItem temp = new ResultItem(item.getTitle(), String.valueOf(a.getValue()), item.getViewItemURL(), result.getItemSearchURL());
         	jsp_result.add(temp);
         }
         

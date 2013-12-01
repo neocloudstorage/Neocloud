@@ -8,23 +8,24 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div class="container" style="width: 100%">
 
-		<div class="header">BestPriceApp</div>
-		<div class="content">
-
-<s:form action="Login" style="text-align: center; font-size:25px;"> 
-
+<s:form action="Login" theme="simple" style="text-align: center; font-size:25px;"> 
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 <br/>
 <br/>
 <br/>
 <h2>
-Enter Product Name and Try Again  !!
+
+Congratulations !!! You have been Registered.
+
+
 </h2>
-<s:submit value="Return to login Page" theme="simple" style="text-align: center; font-size:35px;" />
+<s:submit value="Back to Login Page" style="text-align: center; font-size:25px;" />
 </s:form>
-</div>
-<div class="footer">Team NeoCloud</div>
-	</div>
 </body>
 </html>

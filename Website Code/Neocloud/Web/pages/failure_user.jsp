@@ -7,22 +7,29 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<body>
+<body class="body-class">
 
-<s:form action="Login" theme="simple" style="text-align: center; font-size:25px;"> 
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
+
+	<div class="container" style="width: 100%">
+
+		<div class="header">BestPriceApp</div>
+		<div class="content">
+
+<s:form action="Login" style="text-align: center; font-size:25px;"> 
+
 <br/>
 <br/>
 <br/>
 <h2>
+
 Please try again !!!! Your username or password may be incorrect !!
+
+
 </h2>
-<s:submit value="Return to login Page" style="text-align: center; font-size:15px;" />
+<s:submit value="Return to login Page" theme="simple" style="text-align: center; font-size:25px;" />
 </s:form>
+</div>
+<div class="footer">Team NeoCloud</div>
+	</div>
 </body>
 </html>

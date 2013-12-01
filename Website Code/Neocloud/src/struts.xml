@@ -18,7 +18,13 @@
 			<result name="SUCCESS">pages/results.jsp</result>
 			<result name="FAILURE">pages/failure_search.jsp</result>
 		</action>
-		
+		<action name="RegistrationPage" class="RegistrationPageAction">
+			<result name="SUCCESS">pages/registrationPage.jsp</result>
+		</action>
+		<action name="RegisterInDB" class="RegisterInDBAction">
+			<result name="SUCCESS">pages/registrationSuccess.jsp</result>
+			<result name="FAILURE">pages/registrationFailure.jsp</result>
+		</action>
 	</package>
  
 </struts>
