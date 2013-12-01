@@ -1,3 +1,8 @@
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.ResultSet;
+
 public class WelcomeUserAction{
  
 	private String username;
@@ -24,15 +29,51 @@ public class WelcomeUserAction{
         WelcomeUserAction wobj = new WelcomeUserAction();
         wobj.setUsername(username);
         wobj.setPassword(password);
-        System.out.println("Username is ***************:  "+wobj.getUsername());
-        System.out.println("Username is ***************:  "+wobj.getPassword());
-        //Enter database code to match user name and password and remove below written logic
-        if(wobj.getUsername().length()==0|!(wobj.getUsername().contentEquals(wobj.getPassword()))){
-        	System.out.println("in here");
+       
+        // database code to match user name and password 
+        if(wobj.getUsername().length()==0 || wobj.getPassword().length()==0)
+        {
         	return "FAILURE";
         }
-        System.out.println("here");
-		return "SUCCESS";
+        
+        DBConnector myConnector = new DBConnector();
+		Connection myConnection = myConnector.getDbConnection();
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		try 
+		{
+
+			String sqlStmt = "SELECT passwrd FROM users WHERE userName = \""
+					+ getUsername() + "\";";
+			System.out.println(sqlStmt);
+			stmt = myConnection.createStatement();
+
+			if (stmt.execute(sqlStmt)) 
+			{
+				rs = stmt.getResultSet();
+				if(!rs.first())
+					return "FAILURE";
+				String dbPass = (String)rs.getObject(1);
+				if(!  getPassword().equals(dbPass))
+				{
+					return "FAILURE";
+				}
+				return "SUCCESS";
+			}
+			else 
+				return "FAILURE";
+			
+		} 
+		catch (SQLException ex) 
+		{
+			// handle any errors
+			System.out.println("SQLException: " + ex.getMessage());
+			System.out.println("SQLState: " + ex.getSQLState());
+			System.out.println("VendorError: " + ex.getErrorCode());
+			return "FAILURE";
+		}
+        
  
 	}
 }

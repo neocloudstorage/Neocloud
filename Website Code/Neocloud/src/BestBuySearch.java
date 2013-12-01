@@ -5,13 +5,23 @@ import com.mattwilliamsnyc.service.remix.*;
 
 public class BestBuySearch 
 {
+	
 	public ArrayList<ResultItem> runBestBuySearch (String keyword)
 	{
 		Remix remix = new Remix("2z5atp8fr28ukc8ydzpxdwyk");
         List<String> productFilters = new ArrayList<String>();
         ArrayList<ResultItem> bestBuyResults = new ArrayList<ResultItem>();
         
-        productFilters.add("search="+keyword);
+        String [] filters = keyword.split(" ");
+        StringBuffer filtered_keyword = new StringBuffer();
+        
+        for(int i=0; i<filters.length;i++)
+        {
+        	filtered_keyword.append(filters[i]);
+        	filtered_keyword.append("%20");
+        }
+        
+        productFilters.add("search="+filtered_keyword);
 
         try {
             ProductsResponse response = remix.getProducts(productFilters);
