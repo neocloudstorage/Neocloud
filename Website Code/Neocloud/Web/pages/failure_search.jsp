@@ -19,9 +19,11 @@
 <br/>
 <br/>
 <h2>
+<font size=6 color="BAF4F5">
 Enter Product Name and Try Again  !!
+</font>
 </h2>
-<s:submit value="Return to login Page" theme="simple" style="text-align: center; font-size:35px;" />
+<s:submit value="Return to login Page" theme="simple" style="text-align: center; font-size:25px;font-family:cursive;background-color:#BAF4F5" />
 </s:form>
 </div>
 <div class="footer">Team NeoCloud</div>

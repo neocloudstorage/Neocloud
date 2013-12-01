@@ -15,18 +15,17 @@
 			<s:form action="RegisterInDB" theme="simple" style="text-align: center; font-size:25px; font-color:Red"> 
 			<br/>
 			<br/>
-			<br/>
 			
-			    <font size="6" color="black">&nbsp&nbsp&nbsp&nbsp Email </font>: <s:textfield name="email"  class="input" />
+			    <font size=7 color="#BAF4F5" style="font-family: serif;">&nbsp&nbsp&nbsp&nbsp Email </font>: <s:textfield name="email" style="font-size:30px" class="input" />
 				<br>
 				<br/>
-				<font size="6" color="black">Username </font>: <s:textfield name="username"  class="input" />
+				<font size=7 color="#BAF4F5" style="font-family: serif;">Username </font>: <s:textfield name="username" style="font-size:30px" class="input" />
 				<br>
 				<br/>
-				<font size="6" color="black">Password </font>: <s:password name="password"  class="input" />
+				<font size=7 color="#BAF4F5" style="font-family: serif;">Password </font>: <s:password name="password" style="font-size:30px" class="input" />
 				<br>
 				<br/>
-				<s:submit value="Register Me !!" style="text-align: center; font-size:25px;" />
+				<s:submit value="Register Me !!" style="text-align: center; font-size:25px;background-color:BAF4F5;font-family:cursive" />
 			</s:form>
 		</div>
 		<div class="footer">Team NeoCloud</div>

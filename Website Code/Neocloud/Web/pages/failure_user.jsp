@@ -21,12 +21,16 @@
 <br/>
 <br/>
 <h2>
+<font size=6 color="BAF4F5">
 
 Please try again !!!! Your username or password may be incorrect !!
 
+</font>
+
+
 
 </h2>
-<s:submit value="Return to login Page" theme="simple" style="text-align: center; font-size:25px;" />
+<s:submit value="Return to login Page" theme="simple" style="text-align: center; font-size:25px;font-family:cursive;background-color:#BAF4F5" />
 </s:form>
 </div>
 <div class="footer">Team NeoCloud</div>

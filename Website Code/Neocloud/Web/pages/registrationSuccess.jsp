@@ -20,12 +20,12 @@
 <br/>
 <br/>
 <h2>
-
+<font size=5 color="BAF4F5">
 Congratulations !!! You have been Registered.
-
+</font>
 
 </h2>
-<s:submit value="Back to Login Page" style="text-align: center; font-size:25px;" />
+<s:submit value="Back to Login Page" style="text-align: center; font-size:25px;font-family:cursive;background-color:#BAF4F5" />
 </s:form>
 </body>
 </html>

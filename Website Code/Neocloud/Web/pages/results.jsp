@@ -16,12 +16,14 @@
 			style="padding-top: 56px; height: 80%; width: 100%; float: left; text-align: center; text-align: center;">
 
 			<h2>
-				<s:form action="SearchProductList" style="text-align: center;">
-				<br/>
-					<s:textfield name="searchProduct" theme="simple" style="text-align:center; font-size:30px;width: 40%;"><font size="7"> Best Price for : </font></s:textfield>
+			<s:form action="Login"	theme="simple" style="text-align: center; font-size:25px;"> 
+            <s:submit value="Go to Home Page" style="text-align: center; font-size:25px;font-family:cursive;background-color:#BAF4F5" />
+            </s:form>
+				<s:form action="SearchProductList" style="text-align: left;">
+				    <s:textfield name="searchProduct" theme="simple" style="text-align:center; font-size:30px;width:35%;" class="input"><font size="7" color="BAF4F5" >   &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Best Price for : </font></s:textfield>
+					
 					<div class="button" style="text-align: center;">
-					<br/>
-						<button type="submit" style="text-align: center; font-size:25px; margin-left: 250px; color:black;">Go Search !!</button>
+						<button type="submit" style="text-align: center; font-size:25px; margin-top: -45px; margin-left: 800px; color:black;background-color:#BAF4F5;font-family:cursive">Go Search !!</button>
 					</div>​
 				</s:form>
 			</h2>

@@ -19,16 +19,18 @@
 <br/>
 <br/>
 <h1>
+<font size=6 color="BAF4F5">
 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Your Username has been taken or Password too short. Try Again !!
+</font>
 </h1>
 <br/>
-<s:form action="RegistrationPage" theme="simple" style="text-align: center; font-size:25px; font-color:Red">
-<s:submit value="Go to Registration Page" style="text-align: center; font-size:25px;margin-left:130;margin-top:-60" />
+<s:form action="RegistrationPage" theme="simple" style="text-align: center; font-size:25px; font-color:Red;">
+<s:submit value="Go to Registration Page" style="text-align: center; font-family:cursive;background-color:#BAF4F5;font-size:25px;margin-left:130;margin-top:-60;" />
 </s:form>
 <br/>
 <br/>
 <s:form action="Login"	theme="simple" style="text-align: center; font-size:25px;"> 
-<s:submit value="Go to Home Page" style="text-align: center; font-size:25px;" />
+<s:submit value="Go to Home Page" style="text-align: center; font-size:25px;font-family:cursive;background-color:#BAF4F5" />
 </s:form>
 
 </div>

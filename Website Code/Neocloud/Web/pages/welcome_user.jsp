@@ -20,19 +20,19 @@
 	<br/>
 	<br/>
 	<br/>
-		<font size="7" color="black">Hello</font>
-		<font size="7" color="black"><s:property value="username"  /> !!!</font>
+		<font size=6 color="BAF4F5">Hello</font>
+		<font size=6 color="BAF4F5"><s:property value="username"  /> !!!</font>
 	
 	 </h3>  
 	
 	<br/>
 	<h2>
 				<s:form action="SearchProductList" style="text-align: center;">
-					<s:textfield name="searchProduct" theme="simple" style="text-align: center; font-size:30px; width: 40%"><font size="7" color="black"> Best Price for : </font></s:textfield>
+					<s:textfield name="searchProduct" theme="simple" style="text-align: center; font-size:30px; width: 40%"><font size=7 color="BAF4F5"> Best Price for : </font></s:textfield>
 					
 					<div class="button" style="text-align: center;">
 					    <br/>
-						<button type="submit" style="text-align: center; font-size:20px; margin-left: 300px;"><font size="6" color="black">Go Search !!</font></button>
+						<button type="submit" style="text-align: center; font-size:20px;font-family:cursive;background-color:#BAF4F5; margin-left: 300px;"><font size="6" color="black">Go Search !!</font></button>
 					</div>​
 				</s:form>
 			</h2>

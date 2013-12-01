@@ -5,12 +5,13 @@
 
 body 
 {
-background-image:url('img.jpg');
+background-image:url('img8.jpg');
 background-color:#cccccc;
 }
 
 .header {
-	background-color: #A51B11;
+	font-family: cursive;
+	background-color: #34A0A2;
 	width: 100%;
 	text-align: center;
 	padding-top: 5px;
@@ -18,7 +19,8 @@ background-color:#cccccc;
 	top: 0px;
 	bottom: 95%;
 	font-size: 20px;
-	color: white;
+	color: black;
+	
 }
 
 .product-info {
@@ -51,8 +53,9 @@ background-color:#cccccc;
 }
 
 .footer {
+	font-family: cursive;
 	width: 100%;
-	background-color: #A51B11;
+	background-color: #34A0A2;
 	clear: both;
 	text-align: center;
 	bottom: 0px;
@@ -61,10 +64,12 @@ background-color:#cccccc;
 	left: 0px;
 	right: 0px;
 	margin-top: 5px;
-	color: white;
+	color: black;
 }
 
 .content {
+	font-family: serif;
+	color : 34A0A2;
 	margin-left: auto;
 	margin-right: auto;
 	width: 100%;
