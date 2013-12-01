@@ -1,13 +1,4 @@
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Map;
-
-import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.inject.Context;
 
 public class SearctProductListAction {
 	private String searchProduct;
@@ -28,12 +19,31 @@ public class SearctProductListAction {
 	private String walmartProductURL;
 	private ArrayList<ResultItem> ebayResults;
 	ArrayList<ResultItem> amazonResults;
+	ArrayList<ResultItem> bestBuyResults;
+	ArrayList<ResultItem> walmartResults;
+
 	public ArrayList<ResultItem> getAmazonResults() {
 		return amazonResults;
 	}
 
 	public void setAmazonResults(ArrayList<ResultItem> amazonResults) {
 		this.amazonResults = amazonResults;
+	}
+
+	public ArrayList<ResultItem> getBestBuyResults() {
+		return bestBuyResults;
+	}
+
+	public void setBestBuyResults(ArrayList<ResultItem> bestBuyResults) {
+		this.bestBuyResults = bestBuyResults;
+	}
+
+	public ArrayList<ResultItem> getWalmartResults() {
+		return walmartResults;
+	}
+
+	public void setWalmartResults(ArrayList<ResultItem> walmartResults) {
+		this.walmartResults = walmartResults;
 	}
 
 	public ArrayList<ResultItem> getEbayResults() {
@@ -58,7 +68,7 @@ public class SearctProductListAction {
 	}
 
 	public void setEbayProductPrice(String ebayProductPrice) {
-		this.ebayProductPrice = "$"+ebayProductPrice.toString();
+		this.ebayProductPrice = "$" + ebayProductPrice.toString();
 	}
 
 	public String getEbayProductURL() {
@@ -175,81 +185,63 @@ public class SearctProductListAction {
 	public void setSearchProductList(String searchProductList) {
 		this.searchProductList = searchProductList;
 	}
-	
 
 	public String execute() {
 
 		String product = getSearchProduct();
-		if(product.length()==0){
+		if (product.length() == 0) {
 			return "FAILURE";
 		}
 
-		// DB Test code**********************Remove comments from here for DB************************
-		/*DBConnector myConnector = new DBConnector();
-		Connection myConnection = myConnector.getDbConnection();
-		Statement stmt = null;
-		ResultSet rs = null;
-		try {
-			stmt = myConnection.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM test");
-			rs.next();
-			setSearchProductList((String) rs.getObject(1));
-			System.out.println(searchProductList + "Successful from Database!");
-			// or alternatively, if you don't know ahead of time that
-			// the query will be a SELECT...
+		// DB Test code**********************Remove comments from here for
+		// DB************************
+		/*
+		 * DBConnector myConnector = new DBConnector(); Connection myConnection
+		 * = myConnector.getDbConnection(); Statement stmt = null; ResultSet rs
+		 * = null; try { stmt = myConnection.createStatement(); rs =
+		 * stmt.executeQuery("SELECT * FROM test"); rs.next();
+		 * setSearchProductList((String) rs.getObject(1));
+		 * System.out.println(searchProductList + "Successful from Database!");
+		 * // or alternatively, if you don't know ahead of time that // the
+		 * query will be a SELECT...
+		 * 
+		 * // if (stmt.execute("SELECT foo FROM bar")) { // rs =
+		 * stmt.getResultSet(); // }
+		 * 
+		 * // Now do something with the ResultSet .... } catch (SQLException ex)
+		 * { // handle any errors System.out.println("SQLException: " +
+		 * ex.getMessage()); System.out.println("SQLState: " +
+		 * ex.getSQLState()); System.out.println("VendorError: " +
+		 * ex.getErrorCode()); } finally { // it is a good idea to release //
+		 * resources in a finally{} block // in reverse-order of their creation
+		 * // if they are no-longer needed
+		 * 
+		 * if (rs != null) { try { rs.close(); } catch (SQLException sqlEx) { }
+		 * // ignore
+		 * 
+		 * rs = null; }
+		 * 
+		 * if (stmt != null) { try { stmt.close(); } catch (SQLException sqlEx)
+		 * { } // ignore
+		 * 
+		 * stmt = null; } }
+		 * 
+		 * // setSearchProductList(product+ "1  , "+ product+"2  " );
+		 * setProductPrice("$30"); System.out.println(getSearchProduct());
+		 */
 
-			// if (stmt.execute("SELECT foo FROM bar")) {
-			// rs = stmt.getResultSet();
-			// }
+		// End of DB Test Code*******************Till
+		// here************************************************
 
-			// Now do something with the ResultSet ....
-		} catch (SQLException ex) {
-			// handle any errors
-			System.out.println("SQLException: " + ex.getMessage());
-			System.out.println("SQLState: " + ex.getSQLState());
-			System.out.println("VendorError: " + ex.getErrorCode());
-		} finally {
-			// it is a good idea to release
-			// resources in a finally{} block
-			// in reverse-order of their creation
-			// if they are no-longer needed
-
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException sqlEx) {
-				} // ignore
-
-				rs = null;
-			}
-
-			if (stmt != null) {
-				try {
-					stmt.close();
-				} catch (SQLException sqlEx) {
-				} // ignore
-
-				stmt = null;
-			}
-		}
-
-		// setSearchProductList(product+ "1  , "+ product+"2  " );
-		setProductPrice("$30");
-		System.out.println(getSearchProduct());*/
-
-		// End of DB Test Code*******************Till here************************************************
-
-		
-		//Ebay Results fetching and Parsing
+		// Ebay Results fetching and Parsing
 		EbaySearch ebayObj = new EbaySearch();
 		ebayResults = ebayObj.runEbaySearch(product);
-		
-			/*for(ResultItem rs : ebayResults){
-			System.out.println(rs.name);
-			System.out.println(rs.price);
-			System.out.println(rs.url);
-		}*/
-		if (ebayResults==null || ebayResults.size() == 0) {
+
+		/*
+		 * for(ResultItem rs : ebayResults){ System.out.println(rs.name);
+		 * System.out.println(rs.price); System.out.println(rs.url); }
+		 */
+		if (ebayResults == null || ebayResults.size() == 0) {
 			ebayResultList = "No Results";
 			ebayProductPrice = "-";
 			ebayProductURL = "-";
@@ -258,16 +250,18 @@ public class SearctProductListAction {
 			setEbayResultList(ebayResults.get(0).name);
 			setEbayProductPrice(ebayResults.get(0).price);
 			setEbayProductURL(ebayResults.get(0).url);
-			/*setEbayResultList(ebayResults.get(1).name);
-			setEbayProductPrice(ebayResults.get(1).price);
-			setEbayProductURL(ebayResults.get(1).url);*/
+			/*
+			 * setEbayResultList(ebayResults.get(1).name);
+			 * setEbayProductPrice(ebayResults.get(1).price);
+			 * setEbayProductURL(ebayResults.get(1).url);
+			 */
 		}
-		//End of Ebay code
-		
-		//Amazon result fetching and parsing
+		// End of Ebay code
+
+		// Amazon result fetching and parsing
 		AmazonSearch amazonObj = new AmazonSearch();
-	    amazonResults = amazonObj.runAmazonSearch(product);
-		if (amazonResults==null || amazonResults.size() == 0) {
+		amazonResults = amazonObj.runAmazonSearch(product);
+		if (amazonResults == null || amazonResults.size() == 0) {
 			setAmazonResultList("No Results");
 			setAmazonProductPrice("-");
 			setAmazonProductURL("-");
@@ -276,9 +270,18 @@ public class SearctProductListAction {
 			setAmazonProductPrice(amazonResults.get(0).price);
 			setAmazonProductURL(amazonResults.get(0).url);
 		}
-		//End of Amazon Code
-		
-		
+		// End of Amazon Code
+
+		// Best Buy result fetching and parsing
+		BestBuySearch bestBuyObj = new BestBuySearch();
+		setBestBuyResults(bestBuyObj.runBestBuySearch(product));
+		// End of Best Buy Code
+
+		// Walmart result fetching and parsing
+		WalmartSearch walmartObj = new WalmartSearch();
+		setWalmartResults(walmartObj.runWalmartSearch(product));
+		// End of Walmart Code
+
 		return "SUCCESS";
 
 	}
