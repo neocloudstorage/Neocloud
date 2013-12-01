@@ -27,7 +27,7 @@
 	<s:iterator value="ebayResults">
 	  <p class="meta-text"><br>
 	  <s:property value="name"/><br>
-		Price: <s:property value="price"/><br>
+		Price: $<s:property value="price"/><br>
 		<a href=<s:property value="url"/>>Visit Link</a><br>
 	</p>
 	   </s:iterator>
