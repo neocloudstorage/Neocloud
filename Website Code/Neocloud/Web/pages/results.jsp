@@ -21,7 +21,7 @@
 					<s:textfield name="searchProduct" theme="simple" style="text-align:center; font-size:30px;width: 40%;"><font size="7"> Best Price for : </font></s:textfield>
 					<div class="button" style="text-align: center;">
 					<br/>
-						<button type="submit" style="text-align: center; font-size:30px; margin-left: 250px; color:#ECECEC">Go Search !!</button>
+						<button type="submit" style="text-align: center; font-size:25px; margin-left: 250px; color:black;">Go Search !!</button>
 					</div>​
 				</s:form>
 			</h2>

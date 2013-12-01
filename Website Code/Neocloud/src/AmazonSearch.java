@@ -68,7 +68,7 @@ public class AmazonSearch
             	Node title = titleNodes.item(i);
                 Node lowestPrice = priceNodes.item(i);
                 Node url = urlNodes.item(i);
-                ResultItem temp = new ResultItem(title.getTextContent(), lowestPrice.getTextContent(), url.getTextContent());
+                ResultItem temp = new ResultItem(title.getTextContent(), lowestPrice.getTextContent(), url.getTextContent(), requestUrl);
                 amazonResults.add(temp);
                 System.out.println(title.getTextContent());
                 System.out.println(lowestPrice.getTextContent());

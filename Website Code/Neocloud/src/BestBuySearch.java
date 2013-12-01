@@ -8,7 +8,8 @@ public class BestBuySearch
 	
 	public ArrayList<ResultItem> runBestBuySearch (String keyword)
 	{
-		Remix remix = new Remix("2z5atp8fr28ukc8ydzpxdwyk");
+		String API_KEY = "2z5atp8fr28ukc8ydzpxdwyk";
+		Remix remix = new Remix(API_KEY);
         List<String> productFilters = new ArrayList<String>();
         ArrayList<ResultItem> bestBuyResults = new ArrayList<ResultItem>();
         
@@ -22,6 +23,8 @@ public class BestBuySearch
         }
         
         productFilters.add("search="+filtered_keyword);
+        
+        String search_url = "http://api.remix.bestbuy.com/v1/products(search="+filtered_keyword+")?apiKey="+API_KEY;
 
         try {
             ProductsResponse response = remix.getProducts(productFilters);

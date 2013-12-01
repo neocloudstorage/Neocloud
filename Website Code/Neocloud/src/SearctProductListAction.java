@@ -7,7 +7,7 @@ public class SearctProductListAction {
 
 	private String ebayResultList;
 	private String ebayProductPrice;
-	private String ebayProductURL;
+	public String ebayProductURL;
 	private String amazonResultList;
 	private String amazonProductPrice;
 	private String amazonProductURL;

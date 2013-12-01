@@ -48,7 +48,7 @@ public class WalmartSearch
                     System.out.println(lowestPrice.getTextContent());
                     System.out.println(url.getTextContent());
                     
-                    ResultItem temp = new ResultItem(title.getTextContent(), lowestPrice.getTextContent(), url.getTextContent());
+                    ResultItem temp = new ResultItem(title.getTextContent(), lowestPrice.getTextContent(), url.getTextContent(), requestUrl);
                     walmartResults.add(temp);
                     count++;
             	}
