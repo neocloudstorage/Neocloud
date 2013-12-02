@@ -44,7 +44,8 @@ int main (int argc, char *argv[])
      {
        ifstream ifs;
        ofstream ofs;
-       string pathToReadFile = "crawledData_EBay/linkdb/links";
+       //string pathToReadFile = "crawledData_EBay/linkdb/links";
+       string pathToReadFile = "link";
        string pathToWriteFile = "results/";
        mkdir(pathToWriteFile.c_str(), S_IRWXU);
 
@@ -80,7 +81,7 @@ int main (int argc, char *argv[])
 
 	         while(stritr != enditr)
         	   {
-	             ofs<<"Product Name::::"<<stritr->first<<"::::Product Price::::"<<stritr->second<<"::::URL::::"<<token<<"::::Store::::Ebay"<<endl;
+	             cout<<"Product Name::::"<<stritr->first<<"::::Product Price::::"<<stritr->second<<"::::URL::::"<<token<<"::::Store::::Ebay"<<endl;
 	             stritr++;
 	           }
                  count = count + 1;
@@ -103,7 +104,7 @@ int main (int argc, char *argv[])
 
                      while(stritr != enditr)
                        {
-                         ofs<<"Product Name::::"<<stritr->first<<"::::Product Price::::"<<stritr->second<<"::::URL::::"<<token<<"::::Store::::Ebay"<<endl;
+                         cout<<"Product Name::::"<<stritr->first<<"::::Product Price::::"<<stritr->second<<"::::URL::::"<<token<<"::::Store::::Ebay"<<endl;
                          stritr++;
                        }
                      count = count + 1;
