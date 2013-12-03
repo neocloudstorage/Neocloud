@@ -1,4 +1,4 @@
 all:
-	g++ Parser_Ebay.cpp -lcurl -o parse
+	g++ Parser_Walmart.cpp -lcurl -o parse
 
 
