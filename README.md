@@ -6,4 +6,4 @@ Cloud based application for Product Price Comparison. Implements partial Crawler
 to extract product information from various retail websites. User can use this service to compare 
 product prices from different retailers. 
 
-It is currently deployed on Azure accessible at bestprice.cloudapp.net/Neocloud/Login
+It is currently deployed on Azure accessible at http://bestprice.cloudapp.net/Neocloud/Login
